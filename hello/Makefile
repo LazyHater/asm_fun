@@ -1,0 +1,10 @@
+all: hello
+
+hello: hello.o
+	ld hello.o -o hello
+
+hello.o: 
+	as hello.s -o hello.o
+
+clean:
+	rm hello hello.o
