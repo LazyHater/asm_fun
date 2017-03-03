@@ -5,7 +5,7 @@ SYSWRITE = 4
 SYSEXIT = 1
 
 .data
-hello_msg: .ascii "Hello!\n"
+hello_msg: .ascii "Hello darkness, my old friend.\n"
 hello_msg_len = . - hello_msg
 
 .text
