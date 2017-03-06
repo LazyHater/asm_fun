@@ -1,10 +1,10 @@
 all: hello
 
 hello: hello.o
-	ld hello.o -o hello
+	ld hello.o -m elf_i386 -o hello
 
 hello.o: hello.s 
-	as hello.s -o hello.o
+	as --32 hello.s -o hello.o
 
 clean:
 	rm hello hello.o
