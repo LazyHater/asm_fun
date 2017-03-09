@@ -1,17 +1,20 @@
 #!/bin/bash
+TEST_STR_1="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+TEST_STR_2="AaBbCcDdEeFfGg"
+TEST_STR_3="asdfNOnonOOJNon10240128120!@@#U*67asdASDAASDdas"
 echo ------------------------------------------------
 echo input:
-echo ABCDEFGHIJKLMNOPQRSTUVWXYZ
+echo $TEST_STR_1 
 echo output:
-echo ABCDEFGHIJKLMNOPQRSTUVWXYZ | ./task_0
+echo $TEST_STR_1 | ./task_0
 echo ------------------------------------------------
 echo input: 
-echo AaBbCcDdEeFfGg
+echo $TEST_STR_2    
 echo output:
-echo AaBbCcDdEeFfGg | ./task_0
+echo $TEST_STR_2 | ./task_0
 echo ------------------------------------------------
 echo input: 
-echo asdfNOnonOOJNon10240128120!@@#U*67asdASDAASDdas
+echo $TEST_STR_3
 echo output:
-echo asdfNOnonOOJNon10240128120!@@#U*67asdASDAASDdas | ./task_0
+echo $TEST_STR_3 | ./task_0
 echo ------------------------------------------------

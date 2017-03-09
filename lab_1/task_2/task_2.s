@@ -9,7 +9,7 @@ SYSWRITE = 4
 SYSEXIT = 1
 
 .data 
- buff: .space 5,  0x00 # 5 cuz int consist of 4 bytes + 1 byte for '\n'
+ buff: .space 9,  0x00 # 5 cuz int consist of 4 bytes + 1 byte for '\n'
  error_msg: .ascii "Not valid input!\n"
  error_msg_len = . - error_msg
  .text
@@ -19,31 +19,37 @@ main:
 	mov %esp, %ebp #create stack frame
 
   call get_input
-	pushl $5
+	pushl $9
 	pushl $buff
 	call print
 
 	#magic stuff here
 	movl $0, %ecx
-	movl $buff, %ebx
-	#check if it is A-F
+	movl $0, %edx
 	loop:
-	cmp $'A', (%ebx,%ecx,1)
+	sall $4, %edx #prepare edx for another byte
+	movb buff(,%ecx,1), %al #load byte from buff
+	#check if it is A-F
+	cmp $'a', %eax
 	jl skip
-	cmp $'F', (%ebx,%ecx,1)
+	cmp $'f', %eax
 	jg skip
 	
 	#here we know that we got A-F
+	sub $('a'-10), %eax
+	add %eax, %edx
 	jmp next
 
 	skip:
 	#check if we got 0-9
-	cmp $'0', (%ebx,%ecx,1)
+	cmp $'0', %eax
 	jl not_valid
-	cmp $'9', (%ebx,%ecx,1)
+	cmp $'9', %eax
 	jg not_valid
 
 	#here we know that we got 0-9
+	sub $('0'), %eax
+	add %eax, %edx
 	jmp next
 
 	not_valid:
@@ -54,10 +60,10 @@ main:
 
 	next:
 	inc %ecx
-	cmp $0xa, (%ebx,%ecx,1) #check if it is enter
-	
+	movb buff(,%ecx,1), %al #load byte from buff
+	cmp $0xa, %eax #check if it is enter
   jne loop 
-
+bexit:
   jmp exit
 
 #[ msg ][msg_len][ebp]
@@ -76,7 +82,7 @@ get_input:
   movl $SYSREAD, %eax
   movl $STDIN, %ebx
   movl $buff, %ecx
-  movl $5, %edx
+  movl $9, %edx
   int $0x80
   ret
 
