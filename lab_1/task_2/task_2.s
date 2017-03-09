@@ -20,17 +20,17 @@ main:
 
   call get_input
 	pushl $5
-	pushl buff
+	pushl $buff
 	call print
 
 	#magic stuff here
 	movl $0, %ecx
-	movl buff, %ebx
+	movl $buff, %ebx
 	#check if it is A-F
 	loop:
-	cmp $'A', buff(,%ecx,1)
+	cmp $'A', (%ebx,%ecx,1)
 	jl skip
-	cmp $'F', buff(,%ecx,1)
+	cmp $'F', (%ebx,%ecx,1)
 	jg skip
 	
 	#here we know that we got A-F
@@ -38,9 +38,9 @@ main:
 
 	skip:
 	#check if we got 0-9
-	cmp $'0', buff(,%ecx,1)
+	cmp $'0', (%ebx,%ecx,1)
 	jl not_valid
-	cmp $'9', buff(,%ecx,1)
+	cmp $'9', (%ebx,%ecx,1)
 	jg not_valid
 
 	#here we know that we got 0-9
@@ -54,7 +54,7 @@ main:
 
 	next:
 	inc %ecx
-	cmp $0xa, buff(,%ecx,1) #check if it is enter
+	cmp $0xa, (%ebx,%ecx,1) #check if it is enter
 	
   jne loop 
 
@@ -75,7 +75,7 @@ print:
 get_input:
   movl $SYSREAD, %eax
   movl $STDIN, %ebx
-  movl buff, %ecx
+  movl $buff, %ecx
   movl $5, %edx
   int $0x80
   ret
