@@ -1,3 +1,6 @@
+#Made by Dominik Hofman and internet
+#program implements Caesar cipher on upper case letters
+
 STDIN = 0
 STDOUT = 1
 STDERR = 2
@@ -35,8 +38,6 @@ main:
 	cmp $0xa, (buff) #check if it is enter
   jne main 
   call exit
-
-
 
 print_byte:
   movl $SYSWRITE, %eax
