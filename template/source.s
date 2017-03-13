@@ -12,9 +12,9 @@ SYSEXIT = 1
 	buff: .space buff_len, 0x00
 
 .text
-.global _start
+.global main
 
-_start:
+main:
 	call print_prompt_msg
 	call get_input
 	call print_input

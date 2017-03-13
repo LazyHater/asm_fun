@@ -1,5 +1,5 @@
 #!/bin/bash
-EXEC=task_2
+EXEC=prog
 TEST_STR_1="aaaa"
 TEST_STR_1_ANS="43690"
 TEST_STR_2="1234"
