@@ -1,0 +1,7 @@
+b debug
+display/8i $pc - 10
+display $eax
+display/x $ebx
+display $ecx
+display $edx
+r < 1234.txt
