@@ -14,8 +14,8 @@ SYSEXIT = 1
 	input_buff_len = 20
 	input_buff: .space input_buff_len, 0x00
 
-	output_buff_len = 20
-	output_buff: .space output_buff_len , 0x00
+	output_buff_len = 5
+	output_buff: .space output_buff_len , 0x0a
 	#debug
 	#output_buff_len = 8 
 	#output_buff: .ascii "Hello2.\n"
@@ -35,9 +35,10 @@ main:
 ascii_to_uint:
 	mov $0, %eax
 	mov $0, %ecx
+	mov $0, %edx
 	mov $input_buff, %ebx 
-
 	ascii_to_uint_loop:
+debug:
 
 	cmpb $'0', (%ebx) #if (ebx < 0) goto invalid input
   jl invalid_input
@@ -50,9 +51,10 @@ ascii_to_uint:
   #subb '0' to get value in memory	
 	subb $'0', (%ebx)
 	#multiply eax by 10 and add to eax just calculated
-	movb $10, %cl
-	mul %cl
-	addb (%ebx), %al
+	movw $10, %cx
+	mul %cx
+	movb (%ebx), %dl
+	addl %edx, %eax
 
 	
 	inc %ebx 
@@ -62,19 +64,32 @@ ascii_to_uint:
 
 #in eax we have value to convert to ascii
 uint_to_ascii:
-	mov $3, %ecx
+	mov $4, %ecx
 	
-debug:
 	uint_to_ascii_loop:
 	
 	mov %eax, %edx
+	dec %ecx
+	shl $2, %cl 
   shr %cl, %edx # edx = edx >> ecx
+	shr $2, %cl
+	inc %ecx
 	and $0xf, %edx # edx = edx && 0xf (and with mask)
 	#here in edx we have value of one digit
 
-	dec %ecx
-	cmp $0, %ecx
-	jl uint_to_ascii_loop
+	addb $'0', %dl
+	movl $4, %ebx
+	subl %ecx, %ebx
+
+
+  cmp $'9', %dl
+	jle skip
+	addb $39, %dl
+skip:
+
+	movb %dl, output_buff(,%ebx,1)
+
+	loop uint_to_ascii_loop
 
 	ret
 

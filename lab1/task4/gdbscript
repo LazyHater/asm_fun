@@ -1,7 +1,8 @@
 b debug
 display/8i $pc - 10
-display $eax
+display/x $eax
 display/x $ebx
-display $ecx
-display $edx
+display/x $ecx
+display/x $edx
+display/5x input_buff
 r < 1234.txt
