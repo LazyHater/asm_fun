@@ -1,0 +1,8 @@
+b debug
+display/8i $pc - 10
+display/x $eax
+display/x $ebx
+display/x $ecx
+display/x $edx
+display/x buff_out
+r 
