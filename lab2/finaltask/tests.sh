@@ -1,2 +1,2 @@
 #!/bin/bash
-./prog | hexdump -C
+./prog | hexdump -C -v
