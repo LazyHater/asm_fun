@@ -4,7 +4,5 @@ display/x $eax
 display/x $ebx
 display/x $ecx
 display/x $edx
-display/x $esp
-display/x $ebp
-display/4w $esp
+display/x $edi
 r

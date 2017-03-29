@@ -1,3 +1,6 @@
+#program adds 2 big numbers, where one digit is 32bit long
+
+
 STDIN = 0
 STDOUT = 1
 SYSREAD = 3

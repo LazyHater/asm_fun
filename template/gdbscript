@@ -7,6 +7,4 @@ display/x $edx
 display/x $esp
 display/x $ebp
 display/4w $esp
-display/2w &number_1
-display/2w &number_2
 r

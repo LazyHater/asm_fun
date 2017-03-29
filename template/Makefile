@@ -11,6 +11,9 @@ gcc: $(SOURCE)
 tests: gcc
 	./tests.sh
 
+debug: gcc
+	gdb --command=gdbscript -q  $(EXEC)
+
 $(EXEC): $(OBJECT) 
 	ld $(OBJECT) -m elf_i386 -o $(EXEC) 
 
