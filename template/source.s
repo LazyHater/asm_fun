@@ -4,12 +4,14 @@ SYSREAD = 3
 SYSWRITE = 4
 SYSEXIT = 1
 
+.align 16
+
 .data
 	prompt_msg: .ascii "Hello.\n"
 	prompt_msg_len = . - prompt_msg
 
 	buff_len = 20
-	buff: .space buff_len, 0x00
+	buff: .zero buff_len
 
 .text
 .global main
@@ -17,6 +19,7 @@ SYSEXIT = 1
 main:
 	call print_prompt_msg
 	call get_input
+	debug:
 	call print_input
 	call exit
 

@@ -1,12 +1,13 @@
-SOURCE = source.s
+SOURCE = source.s 
 OBJECT = $(SOURCE:.s=.o)
 #EXEC = $(SOURCE:.s=)
 EXEC = prog
 
 all: gcc 
+	./prog
 
 gcc: $(SOURCE)
-	gcc -g -m32 $(SOURCE) -o $(EXEC) 
+	gcc -g -m32 $(SOURCE) func.c -o $(EXEC) 
 
 tests: gcc
 	./tests.sh

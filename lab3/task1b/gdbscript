@@ -1,0 +1,10 @@
+b debug
+display/8i $pc
+display/x $eax
+display/x $ebx
+display/x $ecx
+display/x $edx
+display/x $esp
+display/x $ebp
+display/4w $esp
+r
